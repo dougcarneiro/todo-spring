@@ -1,4 +1,4 @@
-package model;
+package com.todo_app.api.models;
 
 import jakarta.persistence.*;
 
