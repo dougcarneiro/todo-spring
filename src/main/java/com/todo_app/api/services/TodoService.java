@@ -23,6 +23,7 @@ public class TodoService {
         if (search != null && !search.isEmpty() && status != null && !status.isEmpty() && prioridade != null && !prioridade.isEmpty()) {
             return taskRepository.findByDonoIdAndTituloOrDescricaoAndStatusAndPrioridade(donoId, removido_ne, search, status, prioridade, sort);
         }
+
         // Se apenas search e status forem fornecidos
         if (search != null && !search.isEmpty() && status != null && !status.isEmpty()) {
             return taskRepository.findByDonoIdAndTituloOrDescricaoAndStatus(donoId, removido_ne, search, status, sort);

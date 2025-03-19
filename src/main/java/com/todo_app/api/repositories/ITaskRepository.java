@@ -16,8 +16,10 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
         WHERE 
                 t.donoId = :donoId
                 and t.removido != :removido_ne
-                and t.titulo ilike :search
-                or t.descricao ilike :search
+                and (
+                        t.titulo ilike :search
+                        or t.descricao ilike :search
+                )
         """)
     public List<Task> findByDonoIdAndTituloOrDescricao(String donoId, boolean removido_ne, String search, Sort sort);
 
@@ -28,9 +30,11 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
         WHERE 
                 t.donoId = :donoId
                 and t.removido != :removido_ne
-                and t.titulo ilike :search
-                or t.descricao ilike :search
                 and t.status in :status
+                and (
+                        t.titulo ilike :search
+                        or t.descricao ilike :search
+                )
         """)
     public List<Task> findByDonoIdAndTituloOrDescricaoAndStatus(String donoId, boolean removido_ne, String search, List<String> status, Sort sort);
 
@@ -52,9 +56,11 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
         WHERE 
                 t.donoId = :donoId
                 and t.removido != :removido_ne
-                and t.titulo ilike :search
-                or t.descricao ilike :search
                 and t.prioridade in :prioridade
+                and (
+                        t.titulo ilike :search
+                        or t.descricao ilike :search
+                )
         """)
     public List<Task> findByDonoIdAndTituloOrDescricaoAndPrioridade(String donoId, boolean removido_ne, String search, List<String> prioridade, Sort sort);
 
@@ -88,10 +94,12 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
         WHERE 
                 t.donoId = :donoId
                 and t.removido != :removido_ne
-                and t.titulo ilike :search
-                or t.descricao ilike :search
                 and t.prioridade in :prioridade
                 and t.status in :status
+                and (
+                        t.titulo ilike :search
+                        or t.descricao ilike :search
+                )
         """)
     public List<Task> findByDonoIdAndTituloOrDescricaoAndStatusAndPrioridade(String donoId, boolean removido_ne, String search, List<String> status, List<String> prioridade, Sort sort);
 
