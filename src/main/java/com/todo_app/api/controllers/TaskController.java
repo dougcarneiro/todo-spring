@@ -41,13 +41,20 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> atualizar(@RequestBody Task task) {
+    public ResponseEntity<Task> atualizar(@RequestBody Task task, @PathVariable long id) {
+        if (todoService.buscarPorId(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         Task updatedTask = todoService.atualizar(task);
         return new ResponseEntity<>(updatedTask, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable long id) {
+        if (todoService.buscarPorId(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         todoService.remover(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

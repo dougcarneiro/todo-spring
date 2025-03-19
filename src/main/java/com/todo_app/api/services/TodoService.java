@@ -53,7 +53,6 @@ public class TodoService {
         return taskRepository.findByDonoId(donoId, removido_ne, sort);
     }
 
-
     public Task inserir(Task task) {
         return taskRepository.save(task);
     }
@@ -66,4 +65,7 @@ public class TodoService {
         this.taskRepository.deleteById(taskId);
     }
 
+    public Task buscarPorId(Long taskId) {
+        return this.taskRepository.findById(taskId).orElse(null);
+    }
 }
